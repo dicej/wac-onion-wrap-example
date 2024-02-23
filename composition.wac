@@ -1,0 +1,9 @@
+package onion:composition targets onion:onion/service;
+
+import types: onion:onion/types;
+
+let virt = new onion:virt { types };
+let service = new onion:service { types: virt["onion:onion/types"] };
+let wrapper = new onion:wrapper { handler: service["onion:onion/handler"], types: virt["onion:onion/types"] };
+
+export wrapper["onion:onion/handler"];

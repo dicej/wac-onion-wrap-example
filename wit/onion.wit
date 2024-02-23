@@ -1,0 +1,33 @@
+package onion:onion;
+
+interface types {
+  resource request {
+    body: func() -> string;
+  }
+
+  resource response {
+    constructor(body: string);
+
+    body: func() -> string;
+  }
+}
+
+interface handler {
+  use types.{request, response};
+
+  handle: func(request: request) -> response;
+}
+
+world service {
+  export handler;
+}
+
+world virt {
+  import types;
+  export types;
+}
+
+world wrapper {
+  import handler;
+  export handler;
+}
